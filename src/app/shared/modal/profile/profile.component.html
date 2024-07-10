@@ -1,0 +1,147 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss()"
+  ></button>
+</div>
+<div class="modal-body">
+  <div *ngIf="isDetails" class="text-center">
+    <img [src]="profile.profileImage" class="profile-img" alt="profile image" />
+  </div>
+
+  <div *ngIf="!isDetails">
+    <label for="file" class="d-block">Choose profile image:</label>
+    <input type="file" id="file" (change)="onFileSelected($event)" />
+    <div class="text-red" *ngIf="fileError">{{ fileError }}</div>
+  </div>
+
+  <form [formGroup]="profileForm">
+    <div class="my-4">
+      <label> Name: </label>
+
+      <input
+        formControlName="name"
+        class="form-control"
+        type="text"
+        placeholder="Your name"
+      />
+      <div
+        class="text-red"
+        *ngIf="
+          profileForm.get('name')?.hasError('required') &&
+          (profileForm.get('name')?.dirty || profileForm.get('name')?.touched)
+        "
+      >
+        Please provide a name.
+      </div>
+      <div
+        class="text-red"
+        *ngIf="profileForm.get('name')?.hasError('customError')"
+      >
+        {{ profileForm.get("name")?.getError("customError") }}
+      </div>
+    </div>
+
+    <div class="my-4">
+      <label> Email: </label>
+
+      <input
+        formControlName="email"
+        class="form-control"
+        type="text"
+        placeholder="e.g. name@example.com"
+      />
+      <div
+        class="text-red"
+        *ngIf="
+          profileForm.get('email')?.hasError('required') &&
+          (profileForm.get('email')?.dirty || profileForm.get('email')?.touched)
+        "
+      >
+        Please provide a email.
+      </div>
+      <div
+        class="text-red"
+        *ngIf="profileForm.get('email')?.hasError('customError')"
+      >
+        {{ profileForm.get("email")?.getError("customError") }}
+      </div>
+    </div>
+
+    <div class="my-4">
+      <label> Phone: </label>
+
+      <input
+        formControlName="phone"
+        class="form-control"
+        type="text"
+        placeholder="+923331234567"
+      />
+      <div
+        class="text-red"
+        *ngIf="
+          profileForm.get('phone')?.hasError('required') &&
+          (profileForm.get('phone')?.dirty || profileForm.get('phone')?.touched)
+        "
+      >
+        Please provide a phone.
+      </div>
+      <div
+        class="text-red"
+        *ngIf="profileForm.get('phone')?.hasError('customError')"
+      >
+        {{ profileForm.get("phone")?.getError("customError") }}
+      </div>
+    </div>
+
+    <div class="my-4">
+      <label> Address: </label>
+
+      <input
+        formControlName="address"
+        class="form-control"
+        type="text"
+        placeholder="Rawalpindi, Pakistan"
+      />
+      <div
+        class="text-red"
+        *ngIf="
+          profileForm.get('address')?.hasError('required') &&
+          (profileForm.get('address')?.dirty ||
+            profileForm.get('address')?.touched)
+        "
+      >
+        Please provide a address.
+      </div>
+      <div
+        class="text-red"
+        *ngIf="profileForm.get('address')?.hasError('customError')"
+      >
+        {{ profileForm.get("address")?.getError("customError") }}
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="submit()"
+    [disabled]="profileForm.invalid"
+    *ngIf="!isDetails"
+  >
+    {{ SaveBtnText }}
+  </button>
+
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.dismiss()"
+    *ngIf="isDetails"
+  >
+    Close
+  </button>
+</div>

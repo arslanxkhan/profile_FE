@@ -13,7 +13,7 @@ import { ApiModule } from './core/openapi/api.module';
 import { AppConfig } from './core/constant/appConfig';
 
 @NgModule({
-  declarations: [AppComponent,  NavbarComponent,],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
